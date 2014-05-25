@@ -1,5 +1,6 @@
 #include <exec.h>
 #include <util.h>
+#include <ports.h>
 #include <platform.h>
 static void exec_00(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
@@ -77,7 +78,38 @@ static void exec_10(alpha_ctx* ctx, byte op1, byte op2, byte op3)
   if(ctx->regs[op1]>=ctx->regs[op2])
     ctx->regs[PC]=ctx->regs[op3]-4;
 }
-
+static void exec_11(alpha_ctx* ctx, byte op1, byte op1, byte op3)
+{
+  ctx->regs[op3]=ctx->regs[op1]&ctx->regs[op2];
+}
+static void exec_12(alpha_ctx* ctx, byte op1, byte op1, byte op1)
+{
+  ctx->regs[op3]=ctx->regs[op1]|ctx->regs[op2];
+}
+static void exec_13(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  ctx->regs[op3]=ctx->regs[op1]^ctx->regs[op2];
+}
+static void exec_14(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  ctx->regs[op3]=ctx->regs[op1]<<ctx->regs[op2];
+}
+static void exec_15(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  ctx->regs[op3]=ctx->regs[op1]>>ctx->regs[op2];
+}
+static void exec_16(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  ctx->regs[op3]=~ctx->regs[op2];
+}
+static void exec_17(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  port_out(ctx->regs[op2]&0xFF, ctx->regs[op3]&0xFF);
+}
+static void exec_18(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  ctx->regs[op3]=port_in(ctx->regs[op2]);
+}
 void exec_opcode(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
   void (*exec_table[256])(alpha_ctx*, byte, byte, byte) = {
