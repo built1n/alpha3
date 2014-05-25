@@ -1,0 +1,72 @@
+Alpha-3
+=======
+Alpha-3 is a RISC architecture with 256 32-bit registers.
+Register 255 is the program counter
+Register 0 contains a permanent zero
+Byte ordering is BIG-ENDIAN.
+
+Most instructions are in the format of OP XX YY ZZ
+Instruction Set
+===============
+?? denotes that a byte is ignored
+* denotes a byte
+
+Load/Store
+==========
+0x00 ?? XX YY - XX->YY
+0x01 ?? XX YY - (XX)->YY
+0x02 ?? XX YY - XX->(YY)
+0x03 XX *  *  - **->XX_HI (destructive to high half)
+0x04 XX *  *  - **->XX_LO (destructive to low half)
+0x05 ?? XX YY - EXCHG XX YY
+
+Arithmetic
+==========
+0x06 XX YY ZZ - XX+YY->ZZ
+0x07 XX YY ZZ - XX-YY->ZZ
+0x08 XX YY ZZ - XX*YY->ZZ
+0x09 XX YY ZZ - XX/YY->ZZ
+0x0A XX YY ZZ - XX%YY->ZZ
+
+Flow Control
+============
+0x0B XX YY ZZ - XX==YY, ZZ->R255
+0x0C XX YY ZZ - XX!=YY, ZZ->R255
+0x0D XX YY ZZ - XX<YY, ZZ->R255
+0x0E XX YY ZZ - XX>YY, ZZ->R255
+0x0F XX YY ZZ - XX<=YY, ZZ->R255
+0x10 XX YY ZZ - XX>=YY, ZZ->R255
+
+Bitwise Ops.
+============
+0x11 XX YY ZZ - XX AND YY->ZZ
+0x12 XX YY ZZ - XX OR YY->ZZ
+0x13 XX YY ZZ - XX XOR YY -> ZZ
+0x14 XX YY ZZ - XX LSH YY -> ZZ
+0x15 XX YY ZZ - XX RSH YY -> ZZ
+0x16 ?? XX YY - NOT XX -> YY
+
+Port I/O
+========
+There are 256 ports, starting at 0. They can have an 8-bit value written to them.
+If the port number or output byte is greater than 255, then only the low byte is used.
+
+0x17 *  XX YY - OUTB XX->YY
+0x18 *  XX YY - INB XX->YY
+
+Usage of Ports
+==============
+Port 0 is the terminal output port (out only)
+Port 1 is the keyboard input port (in only)
+Port 32 is the file I/O port (bi-directional)
+Port 128 is the control port (out only)
+ - Execution will stop when 0xFF is written to this port
+ - File opening will commence if 0x80 is written to this port
+   - The null-terminated file name, in ASCII, will be written
+   - Then, the contents of the file can be read and written through port 32
+   - The file can be closed by writing 0x80 to this port again
+Port 255 is the capabilities port (out only)
+ - Bit 0 (LSB) specifies if keyboard input is supported
+ - Bit 1 specifies if terminal output is supported
+ - Bit 2 specifies if file I/O is supported
+ 
