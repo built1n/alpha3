@@ -1,4 +1,7 @@
 #include <alpha.h>
+#include <exec.h>
+#include <stdlib.h>
+#include <util.h>
 alpha_ctx* alpha_init(byte* mem, word memsz)
 {
   alpha_ctx* ret=malloc(sizeof(alpha_ctx));

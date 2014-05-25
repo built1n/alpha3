@@ -1,4 +1,5 @@
 #include <exec.h>
+#include <util.h>
 #include <platform.h>
 static void exec_00(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {

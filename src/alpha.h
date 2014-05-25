@@ -1,3 +1,5 @@
+#ifndef ALPHA_H_
+#define ALPHA_H_
 #include <stdint.h>
 #include <stdbool.h>
 typedef uint8_t byte;
@@ -11,3 +13,4 @@ typedef struct alpha_ctx {
 } alpha_ctx;
 void alpha_exec(alpha_ctx*);
 alpha_ctx* alpha_init(byte* mem, word memsz);
+#endif
