@@ -6,8 +6,10 @@ Upon startup, all registers are initialized to zero
 Byte ordering is BIG-ENDIAN.
 
 Most instructions are in the format of OP XX YY ZZ
-Instruction Set
-===============
+
+=======================
+====INSTRUCTION SET====
+=======================
 ?? denotes that a byte is ignored
 * denotes a byte
 
@@ -75,3 +77,28 @@ Ports without a specific usage can be used like registers.
 Miscellaneous
 =============
 0xFF ?? ?? ??: NOP
+
+========================
+====ASSEMBLER SYNTAX====
+========================
+Mnemonics should mostly be self-explanatory.
+Registers are prefixed with a 'R', and are numbered in decimal
+Destination/target comes first, then the source operand(s)
+Example:
+
+  ADD R1, R2, R3
+
+Would translate to this line in C:
+
+  r1=r2+r3;
+
+Likewise, jumps are the same:
+  
+  JE R1, R2, R3
+
+Is
+  
+  if(r2==r3)
+    goto r1;
+
+In C.

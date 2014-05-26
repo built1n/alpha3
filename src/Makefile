@@ -1,5 +1,5 @@
-SOURCES=alpha.o platform.o exec.o main.o util.o ports.o
-HEADERS=alpha.h exec.h platform.h util.o
+SOURCES=alpha.o platform.o exec.o main.o util.o ports.o disasm.o
+HEADERS=alpha.h exec.h platform.h util.h disasm.h
 CFLAGS=-I. -O2 -std=gnu99 -Wall
 CXXFLAGS=-I. -Wall
 all: $(SOURCES) $(HEADERS) Makefile
