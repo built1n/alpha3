@@ -31,7 +31,6 @@ void alpha_exec(alpha_ctx* ctx)
 {
   if(ctx->running && ctx->regs[PC]<ctx->memsz-4)
     {
-      alpha_print_state(ctx);
       word instr=readWord(ctx, ctx->regs[PC]);
       exec_opcode(ctx, (instr&0xFF000000)>>24, (instr&0xFF0000)>>16, (instr&0xFF00)>>8, (instr&0xFF));
       ctx->regs[PC]+=4;

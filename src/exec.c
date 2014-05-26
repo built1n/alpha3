@@ -16,11 +16,11 @@ static void exec_02(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 }
 static void exec_03(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  ctx->regs[op1]=(((op2 << 8)| op3) << 16)|ctx->regs[op1]&0xFFFF;
+  ctx->regs[op1]=(((op2 << 8)| op3) << 16)|(ctx->regs[op1]&0xFFFF);
 }
 static void exec_04(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  ctx->regs[op1]=(ctx->regs[op1]<<16)|((op2<<8)|op1);
+  ctx->regs[op1]=(ctx->regs[op1]<<16) | ( (op2<<8) | op3);
 }
 static void exec_05(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
@@ -104,8 +104,7 @@ static void exec_16(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 }
 static void exec_17(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  printf("in exec_17");
-  port_out(ctx, ctx->regs[op2]&0xFF, ctx->regs[op3]&0xFF);
+  port_out(ctx, ctx->regs[op3]&0xFF, ctx->regs[op2]&0xFF);
 }
 static void exec_18(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
@@ -141,10 +140,8 @@ void exec_opcode(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
     &exec_18,
 #include <null-table.h>
   };
-  printf("Exec_opcode entered.\n");
   if(exec_table[opcode])
     {
-      printf("Executing 0x%02X\n", opcode);
       exec_table[opcode](ctx, op1, op2, op3);
     }
 }
