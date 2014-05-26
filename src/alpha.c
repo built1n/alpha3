@@ -1,5 +1,6 @@
 #include <alpha.h>
 #include <exec.h>
+#include <disasm.h>
 #include <stdlib.h>
 #include <util.h>
 #include <stdio.h>
