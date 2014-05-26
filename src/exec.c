@@ -1,7 +1,7 @@
 #include <exec.h>
 #include <util.h>
-#include <ports.h>
 #include <platform.h>
+#include <ports.h>
 static void exec_00(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=ctx->regs[op2];
@@ -24,7 +24,7 @@ static void exec_04(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 }
 static void exec_05(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  ctx->regs[op2]^=ctx->regs[op3]; /* an old trick... */
+  ctx->regs[op2]^=ctx->regs[op3]; /* an old IBM trick... */
   ctx->regs[op3]^=ctx->regs[op2];
   ctx->regs[op2]^=ctx->regs[op3];
 }
@@ -78,11 +78,11 @@ static void exec_10(alpha_ctx* ctx, byte op1, byte op2, byte op3)
   if(ctx->regs[op1]>=ctx->regs[op2])
     ctx->regs[PC]=ctx->regs[op3]-4;
 }
-static void exec_11(alpha_ctx* ctx, byte op1, byte op1, byte op3)
+static void exec_11(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=ctx->regs[op1]&ctx->regs[op2];
 }
-static void exec_12(alpha_ctx* ctx, byte op1, byte op1, byte op1)
+static void exec_12(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=ctx->regs[op1]|ctx->regs[op2];
 }
@@ -104,11 +104,12 @@ static void exec_16(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 }
 static void exec_17(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  port_out(ctx->regs[op2]&0xFF, ctx->regs[op3]&0xFF);
+  printf("in exec_17");
+  port_out(ctx, ctx->regs[op2]&0xFF, ctx->regs[op3]&0xFF);
 }
 static void exec_18(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  ctx->regs[op3]=port_in(ctx->regs[op2]);
+  ctx->regs[op3]=port_in(ctx, ctx->regs[op2]);
 }
 void exec_opcode(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
@@ -135,10 +136,15 @@ void exec_opcode(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
     &exec_13,
     &exec_14,
     &exec_15,
+    &exec_16,
+    &exec_17,
+    &exec_18,
 #include <null-table.h>
   };
+  printf("Exec_opcode entered.\n");
   if(exec_table[opcode])
     {
+      printf("Executing 0x%02X\n", opcode);
       exec_table[opcode](ctx, op1, op2, op3);
     }
 }

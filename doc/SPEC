@@ -60,13 +60,14 @@ Port 0 is the terminal output port (out only)
 Port 1 is the keyboard input port (in only)
 Port 32 is the file I/O port (bi-directional)
 Port 128 is the control port (out only)
- - Execution will stop when 0xFF is written to this port
+ - Execution will stop when 0xFF is written to this port, the value in R0 will be returned
  - File opening will commence if 0x80 is written to this port
-   - The null-terminated file name, in ASCII, will be written
+   - The null-terminated file name, in ASCII and up to 256 chars, will be written
    - Then, the contents of the file can be read and written through port 32
    - The file can be closed by writing 0x80 to this port again
 Port 255 is the capabilities port (out only)
  - Bit 0 (LSB) specifies if keyboard input is supported
  - Bit 1 specifies if terminal output is supported
  - Bit 2 specifies if file I/O is supported
- 
+
+Ports without a specific usage can be used like registers.
