@@ -2,7 +2,7 @@ Alpha-3
 =======
 Alpha-3 is a RISC architecture with 256 32-bit registers.
 Register 255 is the program counter
-Register 0 contains a permanent zero
+Upon startup, all registers are initialized to zero
 Byte ordering is BIG-ENDIAN.
 
 Most instructions are in the format of OP XX YY ZZ
