@@ -18,7 +18,6 @@ byte kbd_read(void)
 }
 void term_write(byte c)
 {
-  printf("Printing char: %d\n", c);
   putchar((char)c);
 }
 void file_open(alpha_ctx* ctx, const char* file)
