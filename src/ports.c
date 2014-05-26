@@ -2,7 +2,6 @@
 #include <platform.h>
 void port_out(alpha_ctx* ctx, byte port, byte val)
 {
-  printf("OUTB 0x%02X->0x%02X\n", val, port);
   switch(port)
     {
     case 0:
@@ -59,5 +58,7 @@ byte port_in(alpha_ctx* ctx, byte port)
       return file_read(ctx);
     case 255:
       return kbd_supported()|(term_supported()<<1)|(file_supported()<<2);
+    default:
+      return ctx->ports.values[port];
     }
 }
