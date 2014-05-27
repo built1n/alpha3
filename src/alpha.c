@@ -18,7 +18,7 @@ alpha_ctx* alpha_init(byte* mem, word memsz)
 }
 void alpha_disasm(alpha_ctx* ctx)
 {
-  if(ctx->running && ctx->regs[PC]<ctx->memsz-4)
+  if(ctx->running && ctx->regs[PC]<ctx->memsz-3)
     {
       word instr=readWord(ctx, ctx->regs[PC]);
       disasm_opcode(ctx, (instr&0xFF000000)>>24, (instr&0xFF0000)>>16, (instr&0xFF00)>>8, (instr&0xFF));
@@ -37,7 +37,7 @@ void alpha_print_state(alpha_ctx* ctx)
 }
 void alpha_exec(alpha_ctx* ctx)
 {
-  if(ctx->running && ctx->regs[PC]<ctx->memsz-4)
+  if(ctx->running && ctx->regs[PC]<ctx->memsz-3)
     {
       word instr=readWord(ctx, ctx->regs[PC]);
       exec_opcode(ctx, (instr&0xFF000000)>>24, (instr&0xFF0000)>>16, (instr&0xFF00)>>8, (instr&0xFF));
