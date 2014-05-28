@@ -1,0 +1,11 @@
+Porting Alpha-3
+===============
+
+Alpha3 is written to be very portable, and uses an abstraction layer to perform platform-specific tasks, such as opening a file or reading from the keyboard.
+
+To port Alpha-3 to a new platform, simply edit the platform.c abstraction layer to suit your needs.
+
+Implementing File I/O
+=====================
+
+struct alpha_ctx has a void pointer for the implementor to use to implement file access.

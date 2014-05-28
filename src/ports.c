@@ -28,7 +28,7 @@ void port_out(alpha_ctx* ctx, byte port, byte val)
 	    {
 	    case 0xFF:
 	      ctx->running=false;
-	      ctx->return_value=ctx->regs[0];
+ 	      ctx->return_value=ctx->regs[0];
 	      break;
 	    case 0x80:
 	      if(!ctx->ports.file_open)

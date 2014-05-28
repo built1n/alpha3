@@ -65,6 +65,7 @@ Port 128 is the control port (out only)
  - Execution will stop when 0xFF is written to this port, the value in R0 will be returned
  - File opening will commence if 0x80 is written to this port
    - The null-terminated file name, in ASCII and up to 256 chars, will be written
+   - The file will be TRUNCATED and opened read/write.
    - Then, the contents of the file can be read and written through port 32
    - The file can be closed by writing 0x80 to this port again
 Port 255 is the capabilities port (out only)
@@ -73,6 +74,12 @@ Port 255 is the capabilities port (out only)
  - Bit 2 specifies if file I/O is supported
 
 Ports without a specific usage can be used like registers.
+
+Stack Operations
+================
+NOTE: Stack grows DOWN, so the SP will increase each push
+0x19 ?? XX YY: PUSH XX, using YY as the stack pointer
+0x1A ?? XX YY: POP XX, using YY as the stack pointer
 
 Miscellaneous
 =============

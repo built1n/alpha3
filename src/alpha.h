@@ -22,6 +22,7 @@ typedef struct alpha_ctx {
   bool running;
   word return_value;
   struct ports_ctx ports;
+  void* file_ptr;
 } alpha_ctx;
 #ifdef __cplusplus
 extern "C"

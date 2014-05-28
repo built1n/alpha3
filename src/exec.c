@@ -110,6 +110,16 @@ static void exec_18(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=port_in(ctx, ctx->regs[op2]);
 }
+static void exec_19(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  writeWord(ctx, ctx->regs[op3], ctx->regs[op2]);
+  ctx->regs[op3]+=4;
+}
+static void exec_1A(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  ctx->regs[op3]-=4;
+  ctx->regs[op2]=readWord(ctx, ctx->regs[op3]);
+}
 void exec_opcode(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
   void (*exec_table[256])(alpha_ctx*, byte, byte, byte) = {
@@ -138,6 +148,8 @@ void exec_opcode(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
     &exec_16,
     &exec_17,
     &exec_18,
+    &exec_19,
+    &exec_1A,
 #include <null-table.h>
   };
   if(exec_table[opcode])
