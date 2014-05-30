@@ -5,6 +5,6 @@ CXXFLAGS=-I. -Wall -O3 -Wall
 all: $(SOURCES) $(HEADERS) Makefile
 	g++ $(SOURCES) -O3 -o alpha
 clean:
-	rm -f $(SOURCES) alpha *~ a.out
+	rm -f $(SOURCES) alpha *~ a.out libalpha.so
 library:
 	g++ $(SOURCES) -O3 -shared -o libalpha.so
