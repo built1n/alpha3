@@ -28,7 +28,7 @@
 #include <alpha.h>
 #include <ctime>
 #define MAX_PROGSIZE 16384
-#define MAX_TIME 10
+#define MAX_TIME 5
 using namespace std;
 char hex_chars[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 alpha_ctx* ctx;
@@ -52,7 +52,7 @@ void run()
 	}
     }
   if(time(0)>=stop)
-    cout << "Maximum execution time exceded.\n"; 
+    cout << "Maximum execution time exceded.<br>Program terminated."; 
 }
 void parse_args(char* query) /* program is passed through GET */
 {
@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
 {
   cout << "Content-type: text/html\n\n";
   vector<byte> prog;
-  cout << "<html><head><title>Executing Alpha3 Program...</title></head><body>Output:<br>";
+  cout << "<html><head><title>Executing Alpha3 Program...</title></head><body>Output:<br>" << flush;
   parse_args(getenv("QUERY_STRING"));
   while(in->good() and prog.size()<MAX_PROGSIZE)
     {
