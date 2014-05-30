@@ -13,3 +13,4 @@ byte file_read(alpha_ctx*);
 void file_write(alpha_ctx*, byte);
 void file_close(alpha_ctx*);
 void mem_out_of_bounds(alpha_ctx*);
+extern const char *newline;

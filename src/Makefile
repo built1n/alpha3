@@ -6,3 +6,5 @@ all: $(SOURCES) $(HEADERS) Makefile
 	g++ $(SOURCES) -O3 -o alpha
 clean:
 	rm -f $(SOURCES) alpha *~ a.out
+library:
+	g++ $(SOURCES) -O3 -shared -o libalpha.so
