@@ -47,7 +47,7 @@ void file_close(alpha_ctx* ctx)
   fclose(ctx->file_ptr);
   return;
 }
-void mem_out_of_bounds(alpha_ctx* ctx)
+void mem_out_of_bounds(alpha_ctx* ctx, word attempt)
 {
-  printf("Bad memory access at 0x%08X\n", ctx->regs[PC]);
+  printf("Bad memory access at 0x%08X\nAttempted address: 0x%08X", ctx->regs[PC], attempt);  
 }
