@@ -7,7 +7,7 @@ static void disasm_00(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 }
 static void disasm_01(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  printf("LD R%d, R%d%s", op3, op2, newline);
+  printf("LD R%d, (R%d)%s", op3, op2, newline);
 }
 static void disasm_02(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
@@ -27,23 +27,23 @@ static void disasm_05(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 }
 static void disasm_06(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  printf("ADD R%d, R%d, R%d%s", op3, op2, op1, newline);
+  printf("ADD R%d, R%d, R%d%s", op1, op2, op3, newline);
 }
 static void disasm_07(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  printf("SUB R%d, R%d, R%d%s", op3, op2, op1, newline);
+  printf("SUB R%d, R%d, R%d%s", op1, op2, op3, newline);
 }
 static void disasm_08(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  printf("MUL R%d, R%d, R%d%s", op3, op2, op1, newline);
+  printf("MUL R%d, R%d, R%d%s", op1, op2, op3, newline);
 }
 static void disasm_09(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  printf("DIV R%d, R%d, R%d%s", op3, op2, op1, newline);
+  printf("DIV R%d, R%d, R%d%s", op1, op2, op3, newline);
 }
 static void disasm_0A(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  printf("MOD R%d, R%d, R%d%s", op3, op2, op1, newline);
+  printf("MOD R%d, R%d, R%d%s", op1, op2, op3, newline);
 }
 static void disasm_0B(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
@@ -138,6 +138,6 @@ void disasm_opcode(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
     }
   else
     {
-      printf("DATA 0x%08X\n", (opcode<<24)&(op1<<16)&(op2<<8)&op3);
+      printf("DATA 0x%08X\n", (opcode<<24)|(op1<<16)|(op2<<8)|op3);
     }
 }
