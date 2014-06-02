@@ -101,38 +101,43 @@ static void disasm_18(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   printf("IN R%d, R%d%s", op3, op2, newline);
 }
+static void (*disasm_table[256])(alpha_ctx*, byte, byte, byte) = {
+  &disasm_00,
+  &disasm_01,
+  &disasm_02,
+  &disasm_03,
+  &disasm_04,
+  &disasm_05,
+  &disasm_06,
+  &disasm_07,
+  &disasm_08,
+  &disasm_09,
+  &disasm_0A,
+  &disasm_0B,
+  &disasm_0C,
+  &disasm_0D,
+  &disasm_0E,
+  &disasm_0F,
+  &disasm_10,
+  &disasm_11,
+  &disasm_12,
+  &disasm_13,
+  &disasm_14,
+  &disasm_15,
+  &disasm_16,
+  &disasm_17,
+  &disasm_18,
+#include <null-table.h>
+};
 void disasm_opcode(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
-  void (*disasm_table[256])(alpha_ctx*, byte, byte, byte) = {
-    &disasm_00,
-    &disasm_01,
-    &disasm_02,
-    &disasm_03,
-    &disasm_04,
-    &disasm_05,
-    &disasm_06,
-    &disasm_07,
-    &disasm_08,
-    &disasm_09,
-    &disasm_0A,
-    &disasm_0B,
-    &disasm_0C,
-    &disasm_0D,
-    &disasm_0E,
-    &disasm_0F,
-    &disasm_10,
-    &disasm_11,
-    &disasm_12,
-    &disasm_13,
-    &disasm_14,
-    &disasm_15,
-    &disasm_16,
-    &disasm_17,
-    &disasm_18,
-#include <null-table.h>
-  };
+  printf("0x%08X: ", ctx->regs[PC]);
   if(disasm_table[opcode])
     {
       disasm_table[opcode](ctx, op1, op2, op3);
+    }
+  else
+    {
+      printf("DATA 0x%08X\n", (opcode<<24)&(op1<<16)&(op2<<8)&op3);
     }
 }
