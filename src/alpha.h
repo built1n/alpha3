@@ -1,7 +1,7 @@
 #ifndef ALPHA_H_
 #define ALPHA_H_
-#define ALPHA_VERSION 1
-#define ALPHA_IMPLEMENTED_REVISION 1
+#define ALPHA_VERSION "v3.1-testing"
+#define ALPHA_INSTRUCTION_SET_VERSION 2
 #include <stdint.h>
 #include <stdbool.h>
 typedef uint8_t byte;

@@ -28,130 +28,149 @@ static void exec_05(alpha_ctx* ctx, byte op1, byte op2, byte op3)
   ctx->regs[op3]^=ctx->regs[op2];
   ctx->regs[op2]^=ctx->regs[op3];
 }
-static void exec_06(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_10(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=ctx->regs[op2]+ctx->regs[op1];
 }
-static void exec_07(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_11(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=ctx->regs[op1]-ctx->regs[op2];
 }
-static void exec_08(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_12(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=ctx->regs[op1]*ctx->regs[op2];
 }
-static void exec_09(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_13(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=ctx->regs[op1]/ctx->regs[op2];
 }
-static void exec_0A(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_14(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=ctx->regs[op1]%ctx->regs[op2];
 }
-static void exec_0B(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_15(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  ctx->regs[op1]+=(op2<<8)|op1;
+}
+static void exec_16(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  ctx->regs[op1]-=(op2<<8)|op1;
+}
+static void exec_17(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  ctx->regs[op1]*=(op2<<8)|op1;
+}
+static void exec_18(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  ctx->regs[op1]/=(op2<<8)|op1;
+}
+static void exec_19(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  ctx->regs[op1]%=(op2<<8)|op1;
+}
+static void exec_30(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   if(ctx->regs[op1]==ctx->regs[op2])
     ctx->regs[PC]=ctx->regs[op3]-4;
 }
-static void exec_0C(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_31(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   if(ctx->regs[op1]!=ctx->regs[op2])
     ctx->regs[PC]=ctx->regs[op3]-4;
 }
-static void exec_0D(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_32(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   if(ctx->regs[op1]<ctx->regs[op2])
     ctx->regs[PC]=ctx->regs[op3]-4;
 }
-static void exec_0E(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_33(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   if(ctx->regs[op1]>ctx->regs[op2])
     ctx->regs[PC]=ctx->regs[op3]-4;
 }
-static void exec_0F(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_34(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   if(ctx->regs[op1]<=ctx->regs[op2])
     ctx->regs[PC]=ctx->regs[op3]-4;
 }
-static void exec_10(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_35(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   if(ctx->regs[op1]>=ctx->regs[op2])
     ctx->regs[PC]=ctx->regs[op3]-4;
 }
-static void exec_11(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_36(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  if(ctx->regs[op1]==0)
+    {
+      ctx->regs[PC]=ctx->regs[op2]+op3-4;
+    }
+}
+static void exec_50(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=ctx->regs[op1]&ctx->regs[op2];
 }
-static void exec_12(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_51(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=ctx->regs[op1]|ctx->regs[op2];
 }
-static void exec_13(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_52(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=ctx->regs[op1]^ctx->regs[op2];
 }
-static void exec_14(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_53(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=ctx->regs[op1]<<ctx->regs[op2];
 }
-static void exec_15(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_54(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=ctx->regs[op1]>>ctx->regs[op2];
 }
-static void exec_16(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_55(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  ctx->regs[op3]=ctx->regs[op1]<<op2;
+}
+static void exec_56(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  ctx->regs[op3]=ctx->regs[op1]>>op2;
+}
+static void exec_57(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=~ctx->regs[op2];
 }
-static void exec_17(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_80(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   port_out(ctx, ctx->regs[op3]&0xFF, ctx->regs[op2]&0xFF);
 }
-static void exec_18(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_81(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=port_in(ctx, ctx->regs[op2]);
 }
-static void exec_19(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_90(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   writeWord(ctx, ctx->regs[op3], ctx->regs[op2]);
   ctx->regs[op3]+=4;
 }
-static void exec_1A(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+static void exec_91(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]-=4;
   ctx->regs[op2]=readWord(ctx, ctx->regs[op3]);
 }
-
-static void (*exec_table[256])(alpha_ctx*, byte, byte, byte) = {
-  &exec_00,
-  &exec_01,
-  &exec_02,
-  &exec_03,
-  &exec_04,
-  &exec_05,
-  &exec_06,
-  &exec_07,
-  &exec_08,
-  &exec_09,
-  &exec_0A,
-  &exec_0B,
-  &exec_0C,
-  &exec_0D,
-  &exec_0E,
-  &exec_0F,
-  &exec_10,
-  &exec_11,
-  &exec_12,
-  &exec_13,
-  &exec_14,
-  &exec_15,
-  &exec_16,
-  &exec_17,
-  &exec_18,
-  &exec_19,
-  &exec_1A,
-#include <null-table.h>
+static void exec_C0(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  for(byte i=op2;i<=op3;++i)
+    {
+      ctx->regs[i]=0;
+    }
+}
+static void exec_unknown(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+}
+static void exec_nop(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+}
+static void (*exec_table[256])(alpha_ctx*, byte, byte, byte)={
+#include "exec_table.h"
 };
-
 void exec_opcode(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
   if(exec_table[opcode])

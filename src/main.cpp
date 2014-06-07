@@ -47,7 +47,7 @@ void do_help(char* name)
   cerr << "  -h, --help\t\t\tPrint this help and exit" << endl;
   cerr << "  -o <file>\t\t\tOutput compiled code to FILE instead of a.out" << endl;
   cerr << "  -q, --quiet\t\t\tDon't print help text in interactive mode" << endl;
-  cerr << "      --version\t\t\tDisplay version information" << endl;
+  cerr << "  -v, --version\t\t\tDisplay version information" << endl;
 }
 void parse_args(int argc, char* argv[])
 {
@@ -101,10 +101,10 @@ void parse_args(int argc, char* argv[])
 	      ++i;
 	    }
 	}
-      else if(arg=="--version")
+      else if(arg=="--version" or arg=="-v")
 	{
-	  cout << "Alpha Emulation Library version " << ALPHA_VERSION << " revision " << ALPHA_IMPLEMENTED_REVISION << endl;
-	  cout << "Built " << __DATE__ << endl;
+	  cout << "Alpha Emulation Library " << ALPHA_VERSION << " implementing instruction set revision " << ALPHA_INSTRUCTION_SET_VERSION << endl;
+	  cout << "Built " << __DATE__ << "." << endl;
 	  cout << "Copyright (C) 2014 Franklin Wei" << endl;
 	  cout << "This program comes with ABSOLUTELY NO WARRANTY; for details see `LICENSE'." << endl;
 	  cout << "This is free software, and you are welcome to redistribute it" << endl;

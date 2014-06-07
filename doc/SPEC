@@ -10,6 +10,7 @@ Most instructions are in the format of OP XX YY ZZ
 =======================
 ====INSTRUCTION SET====
 =======================
+VERSION - 1
 ?? denotes that a byte is ignored
 * denotes a byte
 
@@ -24,37 +25,45 @@ Load/Store
 
 Arithmetic
 ==========
-0x06 XX YY ZZ - XX+YY->ZZ
-0x07 XX YY ZZ - XX-YY->ZZ
-0x08 XX YY ZZ - XX*YY->ZZ
-0x09 XX YY ZZ - XX/YY->ZZ
-0x0A XX YY ZZ - XX%YY->ZZ
+0x10 XX YY ZZ - XX+YY->ZZ
+0x11 XX YY ZZ - XX-YY->ZZ
+0x12 XX YY ZZ - XX*YY->ZZ
+0x13 XX YY ZZ - XX/YY->ZZ
+0x14 XX YY ZZ - XX%YY->ZZ
+0x15 XX *  *  - XX+**->XX
+0x16 XX *  *  - XX-**->XX
+0x17 XX *  *  - XX***->XX
+0x18 XX *  *  - XX/**->XX
+0x19 XX *  *  - XX%**->XX
 
 Flow Control
 ============
-0x0B XX YY ZZ - XX==YY, ZZ->R255
-0x0C XX YY ZZ - XX!=YY, ZZ->R255
-0x0D XX YY ZZ - XX<YY, ZZ->R255
-0x0E XX YY ZZ - XX>YY, ZZ->R255
-0x0F XX YY ZZ - XX<=YY, ZZ->R255
-0x10 XX YY ZZ - XX>=YY, ZZ->R255
+0x30 XX YY ZZ - XX==YY, ZZ->R255
+0x31 XX YY ZZ - XX!=YY, ZZ->R255
+0x32 XX YY ZZ - XX<YY, ZZ->R255
+0x33 XX YY ZZ - XX>YY, ZZ->R255
+0x34 XX YY ZZ - XX<=YY, ZZ->R255
+0x35 XX YY ZZ - XX>=YY, ZZ->R255
+0x36 XX YY *  - X==0, YY+*->R255
 
 Bitwise Ops.
 ============
-0x11 XX YY ZZ - XX AND YY->ZZ
-0x12 XX YY ZZ - XX OR YY->ZZ
-0x13 XX YY ZZ - XX XOR YY -> ZZ
-0x14 XX YY ZZ - XX LSH YY -> ZZ
-0x15 XX YY ZZ - XX RSH YY -> ZZ
-0x16 ?? XX YY - NOT XX -> YY
+0x50 XX YY ZZ - XX AND YY->ZZ
+0x51 XX YY ZZ - XX OR YY->ZZ
+0x52 XX YY ZZ - XX XOR YY -> ZZ
+0x53 XX YY ZZ - XX LSH YY -> ZZ
+0x54 XX YY ZZ - XX RSH YY -> ZZ
+0x55 XX *  ZZ - XX LSH *  -> ZZ
+0x56 XX *  ZZ - XX RSH *  -> ZZ
+0x57 ?? XX YY - NOT XX -> YY
 
 Port I/O
 ========
 There are 256 ports, starting at 0. They can have an 8-bit value written to them.
 If the port number or output byte is greater than 255, then only the low byte is used.
 
-0x17 *  XX YY - OUTB XX->YY
-0x18 *  XX YY - INB XX->YY
+0x80 *  XX YY - OUTB XX->YY
+0x81 *  XX YY - INB XX->YY
 
 Usage of Ports
 ==============
@@ -72,17 +81,19 @@ Port 255 is the capabilities port (out only)
  - Bit 0 (LSB) specifies if keyboard input is supported
  - Bit 1 specifies if terminal output is supported
  - Bit 2 specifies if file I/O is supported
+ - Bits 7-3 are the instruction set version number
 
 Ports without a specific usage can be used like 8-bit registers.
 
 Stack Operations
 ================
 NOTE: Stack grows UPWARDS in MEMORY ADDRESSES, so the SP will increase after each push
-0x19 ?? XX YY: PUSH XX, using YY as the stack pointer, if it is the program counter or stack pointer, it will be before the value before this instruction
-0x1A ?? XX YY: POP XX, using YY as the stack pointer
+0x90 ?? XX YY: PUSH XX, using YY as the stack pointer, if it is the program counter or stack pointer, it will be before the value before this instruction
+0x91 ?? XX YY: POP XX, using YY as the stack pointer
 
 Miscellaneous
 =============
+0xC0 ?? XX YY: Zero all registers from XX-YY, XX and YY CAN be in that range
 0xFF ?? ?? ??: NOP
 
 ========================
@@ -93,3 +104,13 @@ Registers are prefixed with a 'R', and are numbered in decimal
 LD instructions are LD SRC, DEST
 BRANCH instructions are J LEFT, RIGHT, DEST
 Arithmetic instructions are LEFT, RIGHT, DEST
+
+===============================
+====INTENDED REGISTER USAGE====
+===============================
+All registers except the program counter may be used for any purpose.
+However, here are some guidelines:
+R0 - accumulator, return value
+R1 - temporary storage, extended return value
+R2-R253 - general-purpose
+R254 - stack pointer

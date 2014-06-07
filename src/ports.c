@@ -57,7 +57,7 @@ byte port_in(alpha_ctx* ctx, byte port)
     case 32:
       return file_read(ctx);
     case 255:
-      return kbd_supported()|(term_supported()<<1)|(file_supported()<<2);
+      return kbd_supported()|(term_supported()<<1)|(file_supported()<<2)|(ALPHA_INSTRUCTION_SET_VERSION<<3);
     default:
       return ctx->ports.values[port];
     }
