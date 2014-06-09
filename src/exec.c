@@ -157,13 +157,23 @@ static void exec_91(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 }
 static void exec_C0(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  for(byte i=op2;i<=op3;++i)
+  if(op2<=op3)
     {
-      ctx->regs[i]=0;
+      for(byte i=op2;i<=op3;++i)
+        {
+          ctx->regs[i]=0;
+        }
     }
+  else
+    {
+      invalid_instruction(ctx);
+      ctx->running=false;
+      ctx->return_value=ALPHA_ERROR;
+    }     
 }
 static void exec_unknown(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
+  invalid_instruction(ctx);
 }
 static void exec_nop(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {

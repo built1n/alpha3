@@ -7,6 +7,7 @@
 typedef uint8_t byte;
 typedef uint32_t word;
 #define PC 255
+#define ALPHA_ERROR 0xDEADBEEF
 typedef struct ports_ctx {
   bool file_open;
   bool reading_filename;

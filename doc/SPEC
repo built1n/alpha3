@@ -93,7 +93,7 @@ NOTE: Stack grows UPWARDS in MEMORY ADDRESSES, so the SP will increase after eac
 
 Miscellaneous
 =============
-0xC0 ?? XX YY: Zero all registers from XX-YY, XX and YY CAN be in that range
+0xC0 ?? XX YY: Zero all registers from XX-YY, XX and YY CAN be in that range, XX MUST be <= YY
 0xFF ?? ?? ??: NOP
 
 ========================

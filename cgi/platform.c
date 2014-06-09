@@ -46,3 +46,7 @@ void mem_out_of_bounds(alpha_ctx* ctx, word attempt)
 {
   printf("Bad memory access at 0x%08X<br>Attempted address: 0x%08X", ctx->regs[PC], attempt);
 }
+void invalid_instruction(alpha_ctx* ctx)
+{
+  printf("Invalid instruction at address 0x%08X<br>", ctx->regs[PC]);
+}

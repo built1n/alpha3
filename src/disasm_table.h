@@ -24,6 +24,7 @@
 &disasm_17, /* 0x17 */
 &disasm_18, /* 0x18 */
 &disasm_19, /* 0x19 */
+&disasm_unknown, /* 0x1A */
 &disasm_unknown, /* 0x1B */
 &disasm_unknown, /* 0x1C */
 &disasm_unknown, /* 0x1D */

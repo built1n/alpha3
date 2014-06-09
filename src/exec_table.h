@@ -24,6 +24,7 @@
 &exec_17, /* 0x17 */
 &exec_18, /* 0x18 */
 &exec_19, /* 0x19 */
+&exec_unknown, /* 0x1A */
 &exec_unknown, /* 0x1B */
 &exec_unknown, /* 0x1C */
 &exec_unknown, /* 0x1D */
