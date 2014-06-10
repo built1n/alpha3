@@ -48,23 +48,23 @@ static void disasm_14(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 }
 static void disasm_15(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
-  printf("ADD R%d, $0x%04X%s", op1, ((op2<<8)|op1), newline);
+  printf("ADD R%d, $0x%04X%s", op1, ((op2<<8)|op3), newline);
 }
 static void disasm_16(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
-  printf("SUB R%d, $0x%04X%s", op1, ((op2<<8)|op1), newline);
+  printf("SUB R%d, $0x%04X%s", op1, ((op2<<8)|op3), newline);
 }
 static void disasm_17(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
-  printf("MUL R%d, $0x%04X%s", op1, ((op2<<8)|op1), newline);
+  printf("MUL R%d, $0x%04X%s", op1, ((op2<<8)|op3), newline);
 }
 static void disasm_18(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
-  printf("DIV R%d, $0x%04X%s", op1, ((op2<<8)|op1), newline);
+  printf("DIV R%d, $0x%04X%s", op1, ((op2<<8)|op3), newline);
 }
 static void disasm_19(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
-  printf("MOD R%d, $0x%04X%s", op1, ((op2<<8)|op1), newline);
+  printf("MOD R%d, $0x%04X%s", op1, ((op2<<8)|op3), newline);
 }
 static void disasm_30(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
@@ -133,6 +133,14 @@ static void disasm_80(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 static void disasm_81(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
   printf("IN R%d, R%d%s", op3, op2, newline);
+}
+static void disasm_82(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
+{
+  printf("OUT R%d, $0x%02X%s", op3, op2, newline);
+}
+static void disasm_83(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
+{
+  printf("IN R%d, $0x%02X%s", op3, op2, newline);
 }
 static void disasm_90(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {

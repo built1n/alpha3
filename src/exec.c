@@ -50,23 +50,23 @@ static void exec_14(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 }
 static void exec_15(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  ctx->regs[op1]+=(op2<<8)|op1;
+  ctx->regs[op1]+=(op2<<8)|op3;
 }
 static void exec_16(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  ctx->regs[op1]-=(op2<<8)|op1;
+  ctx->regs[op1]-=(op2<<8)|op3;
 }
 static void exec_17(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  ctx->regs[op1]*=(op2<<8)|op1;
+  ctx->regs[op1]*=(op2<<8)|op3;
 }
 static void exec_18(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  ctx->regs[op1]/=(op2<<8)|op1;
+  ctx->regs[op1]/=(op2<<8)|op3;
 }
 static void exec_19(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  ctx->regs[op1]%=(op2<<8)|op1;
+  ctx->regs[op1]%=(op2<<8)|op3;
 }
 static void exec_30(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
@@ -144,6 +144,14 @@ static void exec_80(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 static void exec_81(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=port_in(ctx, ctx->regs[op2]);
+}
+static void exec_82(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  port_out(ctx, op2, ctx->regs[op3]&0xFF);
+}
+static void exec_83(alpha_ctx* ctx, byte op1, byte op2, byte op3)
+{
+  ctx->regs[op3]=port_in(ctx, op2);
 }
 static void exec_90(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {

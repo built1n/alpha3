@@ -62,8 +62,10 @@ Port I/O
 There are 256 ports, starting at 0. They can have an 8-bit value written to them.
 If the port number or output byte is greater than 255, then only the low byte is used.
 
-0x80 *  XX YY - OUTB XX->YY
-0x81 *  XX YY - INB XX->YY
+0x80 ?  XX YY - OUTB XX->YY
+0x81 ?  XX YY - INB XX->YY
+0x82 ?  *  YY - OUTB YY->*
+0x83 ?  *  YY - INB *->YY
 
 Usage of Ports
 ==============
