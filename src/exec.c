@@ -191,8 +191,5 @@ static void (*exec_table[256])(alpha_ctx*, byte, byte, byte)={
 };
 void exec_opcode(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
-  if(exec_table[opcode])
-    {
-      exec_table[opcode](ctx, op1, op2, op3);
-    }
+  exec_table[opcode](ctx, op1, op2, op3);
 }
