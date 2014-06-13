@@ -90,10 +90,6 @@ static void disasm_35(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
   printf("JGE R%d, R%d, R%d%s", op3, op1, op2, newline);
 }
-static void disasm_36(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
-{
-  printf("JZR R%d, R%d, $0x%02X%s", op1, op2, (int8_t)op3, newline);
-}
 static void disasm_50(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
   printf("AND R%d, R%d, R%d%s", op3, op1, op2, newline);

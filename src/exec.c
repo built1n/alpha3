@@ -98,13 +98,6 @@ static void exec_35(alpha_ctx* ctx, byte op1, byte op2, byte op3)
   if(ctx->regs[op1]>=ctx->regs[op2])
     ctx->regs[PC]=ctx->regs[op3]-4;
 }
-static void exec_36(alpha_ctx* ctx, byte op1, byte op2, byte op3)
-{
-  if(ctx->regs[op1]==0)
-    {
-      ctx->regs[PC]=ctx->regs[op2]+op3-4;
-    }
-}
 static void exec_50(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
   ctx->regs[op3]=ctx->regs[op1]&ctx->regs[op2];
@@ -147,7 +140,7 @@ static void exec_81(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 }
 static void exec_82(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  port_out(ctx, op2, ctx->regs[op3]&0xFF);
+  port_out(ctx, op3, ctx->regs[op2]&0xFF);
 }
 static void exec_83(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {

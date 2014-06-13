@@ -10,7 +10,7 @@ Most instructions are in the format of OP XX YY ZZ
 =======================
 ====INSTRUCTION SET====
 =======================
-VERSION - 1
+VERSION - 2
 ?? denotes that a byte is ignored
 * denotes a byte
 
@@ -44,7 +44,6 @@ Flow Control
 0x33 XX YY ZZ - XX>YY, ZZ->R255
 0x34 XX YY ZZ - XX<=YY, ZZ->R255
 0x35 XX YY ZZ - XX>=YY, ZZ->R255
-0x36 XX YY *  - X==0, YY+*->R255
 
 Bitwise Ops.
 ============
@@ -62,10 +61,10 @@ Port I/O
 There are 256 ports, starting at 0. They can have an 8-bit value written to them.
 If the port number or output byte is greater than 255, then only the low byte is used.
 
-0x80 ?  XX YY - OUTB XX->YY
-0x81 ?  XX YY - INB XX->YY
-0x82 ?  *  YY - OUTB YY->*
-0x83 ?  *  YY - INB *->YY
+0x80 ??  XX YY - OUTB XX->YY
+0x81 ??  XX YY - INB XX->YY
+0x82 ??  YY *  - OUTB YY->*
+0x83 ??  *  YY - INB *->YY
 
 Usage of Ports
 ==============
