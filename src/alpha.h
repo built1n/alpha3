@@ -19,7 +19,7 @@ typedef struct ports_ctx {
 typedef struct alpha_ctx {
   word regs[256];
   byte* mem;
-  word memsz;
+  int64_t memsz; /* signed to prevent underflow */
   bool running;
   word return_value;
   struct ports_ctx ports;
