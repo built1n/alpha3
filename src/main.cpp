@@ -145,7 +145,7 @@ void parse_args(int argc, char* argv[])
     }
   if(interactive and !ascii)
     {
-      cerr << "Cannot read binary input from terminal, but will try." << endl;
+      cerr << "Cannot read binary input from terminal." << endl;
     }
   if(compile and debugger)
     {
