@@ -3,7 +3,7 @@
 #include <stdlib.h>
 void writeWord(alpha_ctx* ctx, word addr, word val)
 {
-  if(addr<ctx->memsz-3)
+  if(addr<(int64_t)ctx->memsz-3)
     {
       ctx->mem[addr+3]=val&0xFF;
       ctx->mem[addr+2]=(val&0xFF00)<<8;
@@ -19,7 +19,7 @@ void writeWord(alpha_ctx* ctx, word addr, word val)
 }
 word readWord(alpha_ctx* ctx, word addr)
 {
-  if(addr<ctx->memsz-3)
+  if(addr<(int64_t)ctx->memsz-3)
     {
       word ret=ctx->mem[addr+3];
       ret|=ctx->mem[addr+2]<<8;
