@@ -1,0 +1,4 @@
+This is an EXTREMELY simple assembler.
+It does not support labels, the programmer must calculate those by hand.
+It works by parsing the line into instruction and operands.
+Then it will find the corresponding opcode and write out the machine code to standard output
