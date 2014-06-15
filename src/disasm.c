@@ -163,7 +163,7 @@ static void (*disasm_table[256])(alpha_ctx*, byte, byte, byte, byte) = {
 };
 void disasm_opcode(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
-  printf("0x%08X: %02x %02x %02x %02x ", ctx->regs[PC], opcode, op1, op2, op3);
+  printf("0x%08X: %02x %02x %02x %02x: ", ctx->regs[PC], opcode, op1, op2, op3);
   disasm_table[opcode](ctx, opcode, op1, op2, op3);
   printf("%s", newline);
 }
