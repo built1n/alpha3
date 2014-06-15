@@ -156,14 +156,14 @@ static void disasm_nop(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3
 }
 static void disasm_unknown(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
-  printf("DATA 0x%08X", (opcode<<24)|(op1<<16)|(op2<<8)|op3);
+  printf("DATA $0x%08X", (opcode<<24)|(op1<<16)|(op2<<8)|op3);
 }
 static void (*disasm_table[256])(alpha_ctx*, byte, byte, byte, byte) = {
 #include "disasm_table.h"
 };
 void disasm_opcode(alpha_ctx* ctx, byte opcode, byte op1, byte op2, byte op3)
 {
-  printf("0x%08X: %02x %02x %02x %02x: ", ctx->regs[PC], opcode, op1, op2, op3);
+  printf("0x%08X: %02X %02X %02X %02X: ", ctx->regs[PC], opcode, op1, op2, op3);
   disasm_table[opcode](ctx, opcode, op1, op2, op3);
   printf("%s", newline);
 }
