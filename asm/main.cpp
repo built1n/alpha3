@@ -36,20 +36,12 @@ int main(int argc, char* argv[])
       if(ss)
         ++num_args;
       ss >> op3;
-      if(opcode=="BYTE" && num_args==1)
-        {
-          write(op1);
-        }
+      --num_args;
       /* now assemble */
       for(int i=0;i<NUM_OPCODES;++i)
         {    
           if(opcode==string(opcode_table[i].mnemonic))
             {
-              if(num_args!=opcode_table[i].num_operands)
-                {
-                  cout << "line " << current_line << ": error: need " << opcode_table[i].num_operands << " operands, got " << num_args << "!\n";
-                  return 1;
-                }
               write(opcode_table[i].opcode);
               switch(opcode_table[i].first)
                 {
