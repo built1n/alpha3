@@ -12,6 +12,5 @@ void file_open(alpha_ctx*, const char*);
 byte file_read(alpha_ctx*);
 void file_write(alpha_ctx*, byte);
 void file_close(alpha_ctx*);
-void mem_out_of_bounds(alpha_ctx*, word attempt);
 void invalid_instruction(alpha_ctx* ctx);
 extern const char *newline; /* string to allow for multi-char newline sequences, or HTML line breaks */

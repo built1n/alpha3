@@ -12,9 +12,10 @@ void writeWord(alpha_ctx* ctx, word addr, word val)
     }
   else
     {
-      mem_out_of_bounds(ctx, addr);
+      invalid_instruction(ctx);
       ctx->running=false;
       ctx->return_value=ALPHA_ERROR;
+      ctx->error_code=ALPHA_OUT_OF_BOUNDS;
     }
 }
 word readWord(alpha_ctx* ctx, word addr)
@@ -29,9 +30,10 @@ word readWord(alpha_ctx* ctx, word addr)
     }
   else
     {
-      mem_out_of_bounds(ctx, addr);
+      invalid_instruction(ctx);
       ctx->running=false;
       ctx->return_value=ALPHA_ERROR;
+      ctx->error_code=ALPHA_OUT_OF_BOUNDS;
       return 0;
     }
 }

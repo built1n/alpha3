@@ -78,7 +78,7 @@ void parse_args(char* query) /* program is passed through GET */
 }
 int main(int argc, char* argv[])
 {
-  cout << "Content-type: text/html\n\n";
+  cout << "Content-type: text/html; charset=utf-8\n\n";
   vector<byte> prog;
   cout << "<html><head><title>Executing Alpha3 Program...</title></head><body>Output:<br>" << flush;
   parse_args(getenv("QUERY_STRING"));
@@ -127,6 +127,21 @@ int main(int argc, char* argv[])
   ctx=alpha_init((byte*)p, // memory
 		 prog.size());
   run();
+  if(ctx->error_code!=0)
+    {
+      switch(ctx->error_code)
+        {
+        case ALPHA_OUT_OF_BOUNDS:
+          cerr << "Bad memory access.";
+          break;
+        case ALPHA_DIVIDE_BY_ZERO:
+          cerr << "Attempted division by zero.";
+          break;
+        default:
+          cerr << "Unknown error.";
+          break;
+        }
+    }
   cout << "</body></html>" << flush;
   return 0;
 }

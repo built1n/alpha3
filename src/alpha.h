@@ -8,6 +8,9 @@ typedef uint8_t byte;
 typedef uint32_t word;
 #define PC 255
 #define ALPHA_ERROR 0xDEADBEEF
+#define ALPHA_OUT_OF_BOUNDS 0x01
+#define ALPHA_DIVIDE_BY_ZERO 0x02
+
 typedef struct ports_ctx {
   bool file_open;
   bool reading_filename;
@@ -22,6 +25,7 @@ typedef struct alpha_ctx {
   word memsz;
   bool running;
   word return_value;
+  word error_code;
   struct ports_ctx ports;
   void* file_ptr;
 } alpha_ctx;

@@ -42,11 +42,29 @@ static void exec_12(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 }
 static void exec_13(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  ctx->regs[op3]=ctx->regs[op1]/ctx->regs[op2];
+  word div=ctx->regs[op2];
+  if(div)
+    ctx->regs[op3]=ctx->regs[op1]/ctx->regs[op2];
+  else
+    {
+      invalid_instruction(ctx);
+      ctx->running=false;
+      ctx->return_value=ALPHA_ERROR;
+      ctx->error_code=ALPHA_DIVIDE_BY_ZERO;
+    }
 }
 static void exec_14(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  ctx->regs[op3]=ctx->regs[op1]%ctx->regs[op2];
+  word div=ctx->regs[op2];
+  if(div)
+    ctx->regs[op3]=ctx->regs[op1]%ctx->regs[op2];
+  else
+    {
+      invalid_instruction(ctx);
+      ctx->running=false;
+      ctx->return_value=ALPHA_ERROR;
+      ctx->error_code=ALPHA_DIVIDE_BY_ZERO;
+    } 
 }
 static void exec_15(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
@@ -62,11 +80,29 @@ static void exec_17(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 }
 static void exec_18(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  ctx->regs[op1]/=(op2<<8)|op3;
+  word div=(op2<<8)|op3;
+  if(div)
+    ctx->regs[op1]/=div;
+  else
+    {
+      invalid_instruction(ctx);
+      ctx->running=false;
+      ctx->return_value=ALPHA_ERROR;
+      ctx->error_code=ALPHA_DIVIDE_BY_ZERO;
+    }
 }
 static void exec_19(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {
-  ctx->regs[op1]%=(op2<<8)|op3;
+  word div=(op2<<8)|op3;
+  if(div)
+    ctx->regs[op1]%=(op2<<8)|op3;
+  else
+    {
+      invalid_instruction(ctx);
+      ctx->running=false;
+      ctx->return_value=ALPHA_ERROR;
+      ctx->error_code=ALPHA_DIVIDE_BY_ZERO;
+    }
 }
 static void exec_30(alpha_ctx* ctx, byte op1, byte op2, byte op3)
 {

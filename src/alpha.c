@@ -14,6 +14,7 @@ alpha_ctx* alpha_init(byte* mem, word memsz)
       ret->regs[i]=0;
     }
   ret->running=true;
+  ret->error_code=0;
   return ret;
 }
 void alpha_disasm(alpha_ctx* ctx)

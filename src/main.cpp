@@ -296,5 +296,20 @@ int main(int argc, char* argv[])
       return 0;
     }
   run();
+  if(ctx->error_code!=0)
+    {
+      switch(ctx->error_code)
+        {
+        case ALPHA_OUT_OF_BOUNDS:
+          cerr << "Bad memory access." << endl;
+          break;
+        case ALPHA_DIVIDE_BY_ZERO:
+          cerr << "Attempted division by zero." << endl;
+          break;
+        default:
+          cerr << "Unknown error." << endl;
+          break;
+        }
+    }
   return ctx->return_value;
 }
