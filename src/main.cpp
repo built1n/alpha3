@@ -103,7 +103,7 @@ void parse_args(int argc, char* argv[])
 	}
       else if(arg=="--version" or arg=="-v")
 	{
-	  cout << "Alpha Emulation Library " << ALPHA_VERSION << " implementing instruction set revision " << ALPHA_INSTRUCTION_SET_VERSION << endl;
+	  cout << "Alpha Emulation Library " << ALPHA_VERSION << " implementing instruction revision " << ALPHA_INSTRUCTION_SET_VERSION << endl;
 	  cout << "Built " << __DATE__ << "." << endl;
 	  cout << "Copyright (C) 2014 Franklin Wei" << endl;
 	  cout << "This program comes with ABSOLUTELY NO WARRANTY; for details see `LICENSE'." << endl;
